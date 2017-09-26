@@ -1,6 +1,6 @@
 
 REST TASK
-[![Build Status](https://travis-ci.org/Gvo3d/hello_city.svg?branch=master)](https://travis-ci.org/Gvo3d/hello_city/builds/276874870)
+[![Build Status](https://travis-ci.org/Gvo3d/rest_task.svg?branch=master)](https://travis-ci.org/Gvo3d/hello_city/builds/276874870)
 
 Запуск:
 1)Запаковать jar-архив с помощью maven
