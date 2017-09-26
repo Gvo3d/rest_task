@@ -1,1 +1,2 @@
 language: java
+install: ./travis-start.sh
