@@ -171,8 +171,8 @@
 				<configuration>
 					<changeLogFile>src/main/resources/db-creation.xml</changeLogFile>
 					<driver>org.postgresql.Driver</driver>
-					<url>jdbc:postgresql://localhost:5432/rest</url>
-					<username>rest</username>
+					<url>jdbc:postgresql://localhost:5433/postgres</url>
+					<username>postgres</username>
 					<password>root</password>
 					<verbose>true</verbose>
 					<dropFirst>false</dropFirst>
