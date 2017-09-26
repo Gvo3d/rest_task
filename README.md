@@ -1,6 +1,6 @@
 
 REST TASK
-[![Build Status](https://travis-ci.org/Gvo3d/rest_task.svg?branch=master)](https://travis-ci.org/Gvo3d/rest_task/builds/280184004)
+[![Build Status](https://travis-ci.org/Gvo3d/rest_task.svg?branch=master)](https://travis-ci.org/Gvo3d/rest_task/branches)
 
 Запуск:
 1)Запаковать jar-архив с помощью maven

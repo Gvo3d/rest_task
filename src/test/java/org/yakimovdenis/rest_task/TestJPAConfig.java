@@ -39,7 +39,7 @@ public class TestJPAConfig implements TransactionManagementConfigurer {
 
     public TestJPAConfig() {
         driver = "org.postgresql.Driver";
-        url = "jdbc:postgresql://192.168.99.100:5433/postgres";
+        url = "jdbc:postgresql://localhost:5433/postgres";
         username = "postgres";
         password = "root";
         modelPackage = "org.yakimovdenis.rest_task.models";
