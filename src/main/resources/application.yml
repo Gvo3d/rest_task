@@ -1,7 +1,7 @@
 #PROPS
 dataSource:
   driverClassName: org.postgresql.Driver
-  url: jdbc:postgresql://192.168.99.100:5432/rest
+  url: jdbc:postgresql://localhost:5433/rest
   username: rest
   password: root
   dialect: org.hibernate.dialect.PostgreSQLDialect
