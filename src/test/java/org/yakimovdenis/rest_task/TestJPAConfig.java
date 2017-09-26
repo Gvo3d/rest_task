@@ -39,7 +39,7 @@ public class TestJPAConfig implements TransactionManagementConfigurer {
 
     public TestJPAConfig() {
         driver = "org.postgresql.Driver";
-        url = "jdbc:postgresql://localhost:5433/postgres";
+        url = "jdbc:postgresql://192.168.99.100:5433/postgres";
         username = "postgres";
         password = "root";
         modelPackage = "org.yakimovdenis.rest_task.models";
@@ -48,16 +48,16 @@ public class TestJPAConfig implements TransactionManagementConfigurer {
         quantity = 10000;
         count = 50;
     }
-
-    @Bean
-    public DataSource dataSource(){
-        Log4jdbcProxyDataSource dataSource = new Log4jdbcProxyDataSource(customDataSource());
-        Log4JdbcCustomFormatter log4JdbcCustomFormatter = new Log4JdbcCustomFormatter();
-        log4JdbcCustomFormatter.setLoggingType(LoggingType.SINGLE_LINE);
-        log4JdbcCustomFormatter.setSqlPrefix("SQL:::");
-        dataSource.setLogFormatter(log4JdbcCustomFormatter);
-        return dataSource;
-    }
+//
+//    @Bean
+//    public DataSource dataSource(){
+//        Log4jdbcProxyDataSource dataSource = new Log4jdbcProxyDataSource(customDataSource());
+//        Log4JdbcCustomFormatter log4JdbcCustomFormatter = new Log4JdbcCustomFormatter();
+//        log4JdbcCustomFormatter.setLoggingType(LoggingType.SINGLE_LINE);
+//        log4JdbcCustomFormatter.setSqlPrefix("SQL:::");
+//        dataSource.setLogFormatter(log4JdbcCustomFormatter);
+//        return dataSource;
+//    }
 
     @Bean
     DataSource customDataSource() {
@@ -83,7 +83,7 @@ public class TestJPAConfig implements TransactionManagementConfigurer {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSource());
+        entityManagerFactoryBean.setDataSource(customDataSource());
         entityManagerFactoryBean.setPackagesToScan(modelPackage);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
@@ -91,7 +91,7 @@ public class TestJPAConfig implements TransactionManagementConfigurer {
         jpaProperties.put(org.hibernate.cfg.Environment.DIALECT, dialect);
         jpaProperties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, hbm2ddlAuto);
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
-        entityManagerFactoryBean.setDataSource(dataSource());
+        entityManagerFactoryBean.setDataSource(customDataSource());
         return entityManagerFactoryBean;
     }
 
