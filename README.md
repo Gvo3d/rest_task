@@ -1,3 +1,39 @@
+
+REST TASK
+[![Build Status](https://travis-ci.org/Gvo3d/hello_city.svg?branch=master)](https://travis-ci.org/Gvo3d/hello_city/builds/276874870)
+
+Запуск:
+1)Запаковать jar-архив с помощью maven
+2)установить docker
+3)скопировать в одну директорию и запустить ROOT.jar и start.sh
+*В случае использования MS Windows переименовать start.sh в start.bat, если докер устанавливается на Win 7, то в application.yml (dataSource.url) вписать валидный адресс docker-контейнера(Например: jdbc:postgresql://192.168.99.100:5432/rest). Эти же настройки надо внести в 
+TestJpaConfig(для тестов) и pom.xml(для запуска мавен-таски update).
+
+
+
+Запуск тестов:
+1)Тестовые настройки соединения находятся в TestJpaConfig.java.
+2)У Liqubase модуля под Maven есть goal "update" который отвечает за создание БД на тот случай, если тесты проводятся до первого запуска приложения.
+
+Благодаря preConditions в db-creation.xml ошибок не будет если будет повторная попытка запуска, однако если компилировать на одной машине, а запускать на другой, то надо применять флаг liquibase.skip, иначе будет error при отсутствии instance postgre.
+
+Доп. инфо: http://www.liquibase.org/documentation/maven/generated/update-mojo.html#skip
+
+
+
+Опции:
+В application.yml есть настройки, которые отвечают за количество добавляемых строк и длинну имени.
+application:
+  dataQuantity - количество строк, которые будут добавлены в БД
+  charsCount - количество символов параметра name(не больше 1000 - ограничение в db-creation.xml)
+
+
+
+Endpoint:
+localhost:8080/hello/contacts?nameFilter=
+
+
+
 REGEX стриги запросов:
 .* - вернуть всё
 [A].* - вернуть всё, что начинается с символа А
@@ -9,12 +45,17 @@ REGEX стриги запросов:
 .*[bac].* - вернуть всё, где есть символы b, a, c
 .*\d.* - вернуть всё, где есть цифры
 
+
+
 Тестирование методик сравнения
 На моих настройках(ParsersTest.java):
 SimpleMatcher(100 повторений - в м/с): 21-24
 PatternMatcher(100 повторений - в м/с): 7-8
 ApacheMatcher(100 повторений - в м/с): 7-8
-Был выбран методк основанный на библиотеке Apache.
+
+Был выбран метод основанный на библиотеке Apache.
+
+
 
 P.S.:
 По причине CVE-2016-6816 Tomcat отказывается работать с символами "^", "$" и "\" в строке запроса. У меня было три варианта:
@@ -24,12 +65,15 @@ P.S.:
 
 Был протестирован и выбран второй вариант и Jetty успешно работает с символами: ^, \, $.
 
+
+
 P.S.2:
 Были опробованы две методики итерации - с помощью парралельного стрима и самописный на основе ThreadExecutorPool и Future:
 
 1)List<Contact> contacts = data.parallelStream().filter(c -> regexValidator.isValid(c.getName())).collect(Collectors.toList());
 
 2)Текущая методика на основе класса DataCollector.
+
 Запрос: localhost:8080/hello2/contacts?nameFilter=d.*
 Тайминги (в м/с):
 Parralel Stream: 426,567,552,1023,364

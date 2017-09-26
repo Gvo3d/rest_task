@@ -1,0 +1,16 @@
+#PROPS
+dataSource:
+  driverClassName: org.postgresql.Driver
+  url: jdbc:postgresql://192.168.99.100:5432/rest
+  username: rest
+  password: root
+  dialect: org.hibernate.dialect.PostgreSQLDialect
+  package: org.yakimovdenis.rest_task.models
+
+liquibase:
+  enabled: false
+
+application:
+  dataQuantity: 10000
+  charsCount: 50
+

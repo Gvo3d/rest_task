@@ -15,6 +15,11 @@ public class Contact {
     @Column(name="name")
     private String name;
 
+    public Contact(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Contact(String name) {
         this.name = name;
     }

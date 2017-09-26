@@ -30,7 +30,7 @@ public class DataCollector {
             DataMatcher matcher = new DataMatcher(preData.subList(startingPoint,enddingPoint), regex);
             Future<List<Contact>> future = threadPool.submit(matcher);
             set.add(future);
-            startingPoint = enddingPoint+1;
+            startingPoint = enddingPoint;
         }
     }
 

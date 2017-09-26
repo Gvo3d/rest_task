@@ -4,10 +4,12 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import liquibase.Contexts;
 import liquibase.LabelExpression;
 import liquibase.Liquibase;
+import liquibase.change.DatabaseChangeNote;
 import liquibase.database.Database;
 import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.resource.ClassLoaderResourceAccessor;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +33,7 @@ import java.sql.DriverManager;
 import java.util.Locale;
 import java.util.Properties;
 
+@Data
 @Configuration
 @EnableTransactionManagement
 public class JdbcConfiguration implements TransactionManagementConfigurer {

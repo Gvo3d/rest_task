@@ -32,6 +32,10 @@ public class ContactServiceImpl implements ContactService {
         this.charsCount = charsCount;
     }
 
+    public ContactServiceImpl(List<Contact> data) {
+        this.data = data;
+    }
+
     public ContactServiceImpl() {
     }
 
@@ -42,9 +46,9 @@ public class ContactServiceImpl implements ContactService {
         if (count < dataCount) {
             fillDatabaseWithGeneratedData(dataCount - count);
         }
-        data = new ArrayList<>();
+        data = new ArrayList<>(Math.toIntExact(dataCount));
         contactDao.findAll().iterator().forEachRemaining(contact -> data.add(contact));
-        LOGGER.info("Service started and loaded all data in "+checker.toString()+" milliseconds.");
+        LOGGER.info("Service started and loaded all data in "+checker.doCheck()+" milliseconds.");
     }
 
     public List<Contact> getContactList(String regex) {
@@ -52,6 +56,11 @@ public class ContactServiceImpl implements ContactService {
         List<Contact> contacts = new DataCollector(data, regex,data.size()/2).getResult();
         LOGGER.info(new StringBuilder("Regex: ").append(regex).append(" returns list of ").append(contacts.size()).append(" elements. With processing time: ").append(checker.doCheck()).append(" ms.").toString());
         return contacts;
+    }
+
+    @Override
+    public Long count() {
+        return contactDao.count();
     }
 
     private void fillDatabaseWithGeneratedData(long quantity) {
@@ -62,7 +71,7 @@ public class ContactServiceImpl implements ContactService {
             contacts.add(new Contact(RandomStringUtils.randomAlphanumeric(charsCount)));
         }
         contactDao.save(contacts);
-        LOGGER.info("Data persisted in "+checker.toString()+" milliseconds.");
+        LOGGER.info("Data persisted in "+checker.doCheck()+" milliseconds.");
 
     }
 }
