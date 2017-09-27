@@ -1,11 +1,11 @@
 
-REST TASK
+REST TASK 
 [![Build Status](https://travis-ci.org/Gvo3d/rest_task.svg?branch=master)](https://travis-ci.org/Gvo3d/rest_task/branches)
 
 Запуск:
 1)Запаковать jar-архив с помощью maven
 2)установить docker
-3)скопировать в одну директорию и запустить ROOT.jar и start.sh
+3)скопировать в одну директорию ROOT.jar и start.sh, запустить скрипт. 
 *В случае использования MS Windows переименовать start.sh в start.bat, если докер устанавливается на Win 7, то в application.yml (dataSource.url) вписать валидный адресс docker-контейнера(Например: jdbc:postgresql://192.168.99.100:5432/rest). Эти же настройки надо внести в 
 TestJpaConfig(для тестов) и pom.xml(для запуска мавен-таски update).
 
@@ -31,12 +31,13 @@ application:
 
 Виртуализация:
 Билдим контейнер из dockerfilе,
-при этом вставляем в свойство url(application.yml, pom.xml) название нашего сетевого докер-контейнера: "restgres" вместо "localhost", после чего в одной директории ложим ROOT.jar и Dockerfile, запускаем консоль и из под директории где хранятся оба этих файла запускаем команду.
-Команда:
-docker build -t yakimov /path/to/a/Dockerfile
+при этом вставляем в свойство url(application.yml, pom.xml) название нашего сетевого докер-контейнера: "restgres" вместо "localhost", после чего в одной директории ложим ROOT.jar и Dockerfile, запускаем консоль и из под директории где хранятся оба этих файла вводим команды.
+
 1)Первым делом создаём сеть: docker network create -d bridge restnet
 2)После этого запускаем постгрес-контейнер: docker run --name rest --network=restnet --network-alias restgres -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=root -d postgres:9.6
-3)После этого запускаем наш образ: docker run --name rest_task --network=restnet --network-alias resttask -p 8080:8080 yakimov
+3)После этого запускаем наш образ: docker build --network=restnet /path/to/a/Dockerfile
+4)Вводим docker images и находим в списке наш новосозданный образ.
+5)Запускаем: docker run --name rest_task -network=restnet -p 8080:8080 ${id образа}
 
 Всё, запуск приложения в двух совмещённых контейнерах завершён. Благодаря тому что порт 8080 прокинут на нашу внешнюю машину, мы можем стучаться прямо на следующий эндпоинт.
 
