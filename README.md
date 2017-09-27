@@ -37,7 +37,7 @@ application:
 
 Виртуализация:
 Билдим контейнер из dockerfilе,
-при этом вставляем в свойство url(application.yml, pom.xml) название нашего сетевого докер-контейнера: "restgres" вместо "localhost", после чего в одной директории ложим ROOT.jar и Dockerfile, запускаем консоль и из под директории где хранятся оба этих файла вводим команды.
+при этом вставляем в свойство url(application.yml, pom.xml) название нашего сетевого докер-контейнера: "restgres" вместо "localhost" и меняем порт 5433 на 5432, т.к. внутри виртуального контейнера этот порт не занят и связь будет идти по нему, после чего в одной директории ложим ROOT.jar и Dockerfile, запускаем консоль и из под директории где хранятся оба этих файла вводим команды. 
 
 1)Первым делом создаём сеть: docker network create -d bridge restnet
 2)После этого запускаем постгрес-контейнер: docker run --name rest --network=restnet --network-alias restgres -p 5433:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=root -d postgres:9.6
