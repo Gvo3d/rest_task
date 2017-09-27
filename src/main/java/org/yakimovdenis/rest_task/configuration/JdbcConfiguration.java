@@ -54,6 +54,8 @@ public class JdbcConfiguration implements TransactionManagementConfigurer {
     private String quantity;
     @Value("${application.charsCount}")
     private String count;
+    @Value("${application.stepCount}")
+    private String step;
 
     @PostConstruct
     private void init() {
@@ -142,6 +144,6 @@ public class JdbcConfiguration implements TransactionManagementConfigurer {
 
     @Bean
     ContactService contactService(){
-        return new ContactServiceImpl(Long.parseLong(quantity),Integer.parseInt(count));
+        return new ContactServiceImpl(Long.parseLong(quantity),Integer.parseInt(count), Integer.parseInt(step));
     }
 }

@@ -10,6 +10,7 @@ import org.yakimovdenis.rest_task.models.Contact;
 import org.yakimovdenis.rest_task.service.ContactService;
 import org.yakimovdenis.rest_task.service.ContactServiceImpl;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.regex.PatternSyntaxException;
 
@@ -37,7 +38,16 @@ public class RepositoryTests extends AbstractDatabaseTest {
 
     @Test
     public void getCustomList() {
-        ContactService service = new ContactServiceImpl((List<Contact>) iterables());
+        ContactService service = new ContactServiceImpl(10000, 50, 1000);
+        ContactDao dao = new CustomContactDao();
+        try {
+            Field field = service.getClass().getDeclaredField("contactDao");
+            field.setAccessible(true);
+            field.set(service,dao);
+            field.setAccessible(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println(SEPARATOR);
         List<Contact> contacts = service.getContactList("[h].*");
         List<Contact> contacts2 = service.getContactList(".*[e].*");
@@ -45,16 +55,5 @@ public class RepositoryTests extends AbstractDatabaseTest {
         Assert.assertEquals(2,contacts.size());
         Assert.assertEquals(2,contacts2.size());
         Assert.assertEquals(0,contacts3.size());
-    }
-
-    public Iterable<Contact> iterables() {
-        Contact contact = new Contact(1L,"hello");
-        Contact contact2 = new Contact(2L,"hey");
-        Contact contact3 = new Contact(3L,"yo");
-        List<Contact> result = new ArrayList<>();
-        result.add(contact);
-        result.add(contact2);
-        result.add(contact3);
-        return result;
     }
 }

@@ -24,6 +24,7 @@
 		<java.version>1.8</java.version>
 		<java.version>1.8</java.version>
 		<hibernate-ver>4.3.8.Final</hibernate-ver>
+		<maven.test.skip>true</maven.test.skip>
 	</properties>
 
 	<dependencies>
@@ -39,10 +40,6 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-web</artifactId>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -171,7 +168,7 @@
 				<configuration>
 					<changeLogFile>src/main/resources/db-creation.xml</changeLogFile>
 					<driver>org.postgresql.Driver</driver>
-					<url>jdbc:postgresql://localhost:5433/postgres</url>
+					<url>jdbc:postgresql://localhost:5432/postgres</url>
 					<username>postgres</username>
 					<password>root</password>
 					<verbose>true</verbose>

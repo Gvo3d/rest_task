@@ -36,10 +36,11 @@ public class TestJPAConfig implements TransactionManagementConfigurer {
     private String hbm2ddlAuto;
     private long quantity;
     private int count;
+    private int step;
 
     public TestJPAConfig() {
         driver = "org.postgresql.Driver";
-        url = "jdbc:postgresql://localhost:5433/postgres";
+        url = "jdbc:postgresql://localhost:5432/postgres";
         username = "postgres";
         password = "root";
         modelPackage = "org.yakimovdenis.rest_task.models";
@@ -47,6 +48,7 @@ public class TestJPAConfig implements TransactionManagementConfigurer {
         hbm2ddlAuto = "false";
         quantity = 10000;
         count = 50;
+        step = 1000;
     }
 //
 //    @Bean
@@ -102,6 +104,6 @@ public class TestJPAConfig implements TransactionManagementConfigurer {
 
     @Bean
     ContactService contactService(){
-        return new ContactServiceImpl(quantity,count);
+        return new ContactServiceImpl(quantity,count,step);
     }
 }
