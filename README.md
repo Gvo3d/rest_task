@@ -2,11 +2,15 @@
 REST TASK 
 [![Build Status](https://travis-ci.org/Gvo3d/rest_task.svg?branch=master)](https://travis-ci.org/Gvo3d/rest_task/branches)
 
+Замечание:
+Докер-контейнер ссылается своим портом 5432 на порт 5433 хост-машины, т.к. Travis данный порт считает используемым:
+docker: Error response from daemon: driver failed programming external connectivity on endpoint rest (3fabc0d80ce23b65140193d9c5e7e8fa298f578acff92e77dbe53905bf605eef): Error starting userland proxy: listen tcp 0.0.0.0:5432: bind: address already in use.  
+
 Запуск:
 1)Запаковать jar-архив с помощью maven
 2)установить docker
 3)скопировать в одну директорию ROOT.jar и start.sh, запустить скрипт(как вариант - запустить докер-команду из скрипта и просто запустить приложение из IDE). 
-*В случае использования MS Windows переименовать start.sh в start.bat, если докер устанавливается на Win 7, то в application.yml (dataSource.url) вписать валидный адресс docker-контейнера(Например: jdbc:postgresql://192.168.99.100:5432/rest). Эти же настройки надо внести в 
+*В случае использования MS Windows переименовать start.sh в start.bat, если докер устанавливается на Win 7, то в application.yml (dataSource.url) вписать валидный адресс docker-контейнера(Например: jdbc:postgresql://192.168.99.100:5433/rest). Эти же настройки надо внести в 
 TestJpaConfig(для тестов) и pom.xml(для запуска мавен-таски update).
 
 
@@ -36,7 +40,7 @@ application:
 при этом вставляем в свойство url(application.yml, pom.xml) название нашего сетевого докер-контейнера: "restgres" вместо "localhost", после чего в одной директории ложим ROOT.jar и Dockerfile, запускаем консоль и из под директории где хранятся оба этих файла вводим команды.
 
 1)Первым делом создаём сеть: docker network create -d bridge restnet
-2)После этого запускаем постгрес-контейнер: docker run --name rest --network=restnet --network-alias restgres -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=root -d postgres:9.6
+2)После этого запускаем постгрес-контейнер: docker run --name rest --network=restnet --network-alias restgres -p 5433:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=root -d postgres:9.6
 3)После этого запускаем наш образ: docker build --network=restnet /path/to/a/Dockerfile
 4)Вводим docker images и находим в списке наш новосозданный образ.
 5)Запускаем: docker run --name rest_task -network=restnet -p 8080:8080 ${id образа}
