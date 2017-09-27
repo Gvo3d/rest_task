@@ -30,8 +30,16 @@ application:
 
 
 Виртуализация:
-Билдим контейнер из dockerfilе:
-при этом вставляем в url(application.yml, pom.xml) название нашего сетевого докер-контейнера: "restgres" вместо "localhost".
+Билдим контейнер из dockerfilе,
+при этом вставляем в свойство url(application.yml, pom.xml) название нашего сетевого докер-контейнера: "restgres" вместо "localhost", после чего в одной директории ложим ROOT.jar и Dockerfile, запускаем консоль и из под директории где хранятся оба этих файла запускаем команду.
+Команда:
+docker build -t yakimov /path/to/a/Dockerfile
+1)Первым делом создаём сеть: docker network create -d bridge restnet
+2)После этого запускаем постгрес-контейнер: docker run --name rest --network=restnet --network-alias restgres -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=root -d postgres:9.6
+3)После этого запускаем наш образ: docker run --name rest_task --network=restnet --network-alias resttask -p 8080:8080 yakimov
+
+Всё, запуск приложения в двух совмещённых контейнерах завершён. Благодаря тому что порт 8080 прокинут на нашу внешнюю машину, мы можем стучаться прямо на следующий эндпоинт.
+
 
 
 Endpoint:
@@ -39,7 +47,7 @@ localhost:8080/hello/contacts?nameFilter=
 
 
 
-REGEX стриги запросов:
+REGEX стринги запросов:
 .* - вернуть всё
 [A].* - вернуть всё, что начинается с символа А
 ^\d.* - вернуть всё, что начинается с цифры
