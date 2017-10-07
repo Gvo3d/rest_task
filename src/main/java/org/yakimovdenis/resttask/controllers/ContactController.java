@@ -21,19 +21,19 @@ public class ContactController {
     private ContactService contactService;
 
     @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, value = "/hello/contacts", params = {"nameFilter"})
-    public ResponseEntity< List<Contact>> getContacts(@RequestParam("nameFilter") String regex){
+    public ResponseEntity<String> getContacts(@RequestParam("nameFilter") String regex){
         HttpStatus status;
-        List<Contact> list;
+        String list;
         try {
              list = contactService.getContactList(regex);
         } catch (Exception e) {
             LOGGER.warn("BAD REQUEST: "+e);
-            return new ResponseEntity<List<Contact>>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
         if (list.isEmpty()){
             status = HttpStatus.NO_CONTENT;
         } else status = HttpStatus.OK;
-        ResponseEntity<List<Contact>> response = new ResponseEntity<List<Contact>>(list,status);
+        ResponseEntity<String> response = new ResponseEntity<>(list,status);
         return response;
     }
 }

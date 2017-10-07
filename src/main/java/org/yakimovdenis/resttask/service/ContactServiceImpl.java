@@ -43,7 +43,7 @@ public class ContactServiceImpl implements ContactService {
         LOGGER.info("Service started in " + checker.doCheck() + " milliseconds.");
     }
 
-    public List<Contact> getContactList(String regex) {
+    public String getContactList(String regex) {
         TimeChecker checker = new TimeChecker();
         long count = contactDao.count();
         List<Contact> contacts;

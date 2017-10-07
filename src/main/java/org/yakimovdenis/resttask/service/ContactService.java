@@ -5,6 +5,6 @@ import org.yakimovdenis.resttask.models.Contact;
 import java.util.List;
 
 public interface ContactService {
-    List<Contact> getContactList(String regex);
+    String getContactList(String regex);
     Long count();
 }
