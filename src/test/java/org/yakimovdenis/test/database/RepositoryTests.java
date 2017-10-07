@@ -1,14 +1,14 @@
-package org.yakimovdenis.rest_task.database;
+package org.yakimovdenis.test.database;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.yakimovdenis.rest_task.AbstractDatabaseTest;
-import org.yakimovdenis.rest_task.dao.ContactDao;
-import org.yakimovdenis.rest_task.models.Contact;
-import org.yakimovdenis.rest_task.service.ContactService;
-import org.yakimovdenis.rest_task.service.ContactServiceImpl;
+import org.yakimovdenis.test.AbstractDatabaseTest;
+import org.yakimovdenis.resttask.dao.ContactDao;
+import org.yakimovdenis.resttask.models.Contact;
+import org.yakimovdenis.resttask.service.ContactService;
+import org.yakimovdenis.resttask.service.ContactServiceImpl;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -38,7 +38,7 @@ public class RepositoryTests extends AbstractDatabaseTest {
 
     @Test
     public void getCustomList() {
-        ContactService service = new ContactServiceImpl(10000, 50, 1000);
+        ContactService service = new ContactServiceImpl(10000, 50);
         ContactDao dao = new CustomContactDao();
         try {
             Field field = service.getClass().getDeclaredField("contactDao");

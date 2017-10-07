@@ -1,11 +1,11 @@
-package org.yakimovdenis.rest_task.parsers;
+package org.yakimovdenis.test.parsers;
 
 import org.apache.commons.validator.routines.RegexValidator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakimovdenis.rest_task.support.TimeChecker;
-import org.yakimovdenis.rest_task.models.Contact;
+import org.yakimovdenis.resttask.support.TimeChecker;
+import org.yakimovdenis.resttask.models.Contact;
 
 import java.util.ArrayList;
 import java.util.List;

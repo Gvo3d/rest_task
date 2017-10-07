@@ -5,7 +5,7 @@ dataSource:
   username: postgres
   password: root
   dialect: org.hibernate.dialect.PostgreSQLDialect
-  package: org.yakimovdenis.rest_task.models
+  package: org.yakimovdenis.resttask.models
 
 liquibase:
   enabled: false

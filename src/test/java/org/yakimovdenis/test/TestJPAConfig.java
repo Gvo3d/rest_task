@@ -1,9 +1,6 @@
-package org.yakimovdenis.rest_task;
+package org.yakimovdenis.test;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import net.sf.log4jdbc.Log4jdbcProxyDataSource;
-import net.sf.log4jdbc.tools.Log4JdbcCustomFormatter;
-import net.sf.log4jdbc.tools.LoggingType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -13,9 +10,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
-import org.yakimovdenis.rest_task.RestTaskApplication;
-import org.yakimovdenis.rest_task.service.ContactService;
-import org.yakimovdenis.rest_task.service.ContactServiceImpl;
+import org.yakimovdenis.resttask.RestTaskApplication;
+import org.yakimovdenis.resttask.service.ContactService;
+import org.yakimovdenis.resttask.service.ContactServiceImpl;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -36,19 +33,17 @@ public class TestJPAConfig implements TransactionManagementConfigurer {
     private String hbm2ddlAuto;
     private long quantity;
     private int count;
-    private int step;
 
     public TestJPAConfig() {
         driver = "org.postgresql.Driver";
         url = "jdbc:postgresql://localhost:5433/postgres";
         username = "postgres";
         password = "root";
-        modelPackage = "org.yakimovdenis.rest_task.models";
+        modelPackage = "org.yakimovdenis.resttask.models";
         dialect = "org.hibernate.dialect.PostgreSQLDialect";
         hbm2ddlAuto = "false";
         quantity = 10000;
         count = 50;
-        step = 1000;
     }
 //
 //    @Bean
@@ -104,6 +99,6 @@ public class TestJPAConfig implements TransactionManagementConfigurer {
 
     @Bean
     ContactService contactService(){
-        return new ContactServiceImpl(quantity,count,step);
+        return new ContactServiceImpl(quantity,count);
     }
 }

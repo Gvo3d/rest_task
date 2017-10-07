@@ -1,33 +1,21 @@
-package org.yakimovdenis.rest_task.web;
+package org.yakimovdenis.test.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.yakimovdenis.rest_task.AbstractDatabaseTest;
-import org.yakimovdenis.rest_task.controllers.ContactController;
-import org.yakimovdenis.rest_task.dao.ContactDao;
-import org.yakimovdenis.rest_task.models.Contact;
-import org.yakimovdenis.rest_task.service.ContactService;
-import org.yakimovdenis.rest_task.service.ContactServiceImpl;
+import org.yakimovdenis.test.AbstractDatabaseTest;
+import org.yakimovdenis.resttask.controllers.ContactController;
+import org.yakimovdenis.resttask.models.Contact;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 

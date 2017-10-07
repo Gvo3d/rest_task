@@ -1,11 +1,11 @@
-package org.yakimovdenis.rest_task.database;
+package org.yakimovdenis.test.database;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.yakimovdenis.rest_task.dao.ContactDao;
-import org.yakimovdenis.rest_task.models.Contact;
+import org.yakimovdenis.resttask.dao.ContactDao;
+import org.yakimovdenis.resttask.models.Contact;
 
 import java.util.ArrayList;
 import java.util.List;

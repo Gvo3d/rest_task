@@ -1,6 +1,6 @@
-package org.yakimovdenis.rest_task.service;
+package org.yakimovdenis.resttask.service;
 
-import org.yakimovdenis.rest_task.models.Contact;
+import org.yakimovdenis.resttask.models.Contact;
 
 import java.util.List;
 

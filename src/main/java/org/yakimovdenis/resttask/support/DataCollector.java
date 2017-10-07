@@ -1,10 +1,8 @@
-package org.yakimovdenis.rest_task.support;
+package org.yakimovdenis.resttask.support;
 
 import org.apache.commons.validator.routines.RegexValidator;
 import org.apache.log4j.Logger;
-import org.hibernate.mapping.Collection;
-import org.yakimovdenis.rest_task.models.Contact;
-import org.yakimovdenis.rest_task.service.ContactService;
+import org.yakimovdenis.resttask.models.Contact;
 
 import java.util.ArrayList;
 import java.util.HashSet;

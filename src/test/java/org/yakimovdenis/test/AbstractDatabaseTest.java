@@ -1,4 +1,4 @@
-package org.yakimovdenis.rest_task;
+package org.yakimovdenis.test;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import org.springframework.test.context.ContextConfiguration;

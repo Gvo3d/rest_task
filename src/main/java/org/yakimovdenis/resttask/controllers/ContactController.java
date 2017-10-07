@@ -1,4 +1,4 @@
-package org.yakimovdenis.rest_task.controllers;
+package org.yakimovdenis.resttask.controllers;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.yakimovdenis.rest_task.models.Contact;
-import org.yakimovdenis.rest_task.service.ContactService;
+import org.yakimovdenis.resttask.models.Contact;
+import org.yakimovdenis.resttask.service.ContactService;
 
 import java.util.List;
 
