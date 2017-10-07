@@ -55,7 +55,7 @@ public class ContactServiceImpl implements ContactService {
         LOGGER.info("Service started in " + checker.doCheck() + " milliseconds.");
     }
 
-    public String getContactList(String regex) {
+    public Collection<Contact> getContactList(String regex) {
         TimeChecker checker = new TimeChecker();
         String pattern = PatternResolver.resolvePattern(regex);
         IMap<Long, Contact> contacts = hzInstance.getMap("contacts");
@@ -64,23 +64,7 @@ public class ContactServiceImpl implements ContactService {
         Collection<Contact> result = contacts.values( predicate );
 
         LOGGER.info(new StringBuilder("Regex: ").append(regex).append(" returns list of ").append(result.size()).append(" elements. With processing time: ").append(checker.doCheck()).append(" ms.").toString());
-        return getData(result);
-    }
-
-    private String getData(Collection<Contact> data) {
-        StringBuilder builder = new StringBuilder(100000);
-        builder.append("[\n");
-        boolean first = true;
-        for (Contact contact : data) {
-            if (!first) builder.append(",\n");
-            builder.append(
-                    "    {\n        \"id\": ")
-                    .append(contact.getId())
-                    .append(",\n        \"name\": \"").append(contact.getName()).append("\"\n    }");
-            first = false;
-        }
-        builder.append("]");
-        return builder.toString();
+        return result;
     }
 
     @Override
