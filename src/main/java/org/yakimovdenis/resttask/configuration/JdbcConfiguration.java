@@ -1,10 +1,9 @@
-package org.yakimovdenis.rest_task.configuration;
+package org.yakimovdenis.resttask.configuration;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import liquibase.Contexts;
 import liquibase.LabelExpression;
 import liquibase.Liquibase;
-import liquibase.change.DatabaseChangeNote;
 import liquibase.database.Database;
 import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
@@ -22,15 +21,14 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
-import org.yakimovdenis.rest_task.service.ContactService;
-import org.yakimovdenis.rest_task.service.ContactServiceImpl;
+import org.yakimovdenis.resttask.service.ContactService;
+import org.yakimovdenis.resttask.service.ContactServiceImpl;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Locale;
 import java.util.Properties;
 
 @Data
@@ -54,8 +52,6 @@ public class JdbcConfiguration implements TransactionManagementConfigurer {
     private String quantity;
     @Value("${application.charsCount}")
     private String count;
-    @Value("${application.stepCount}")
-    private String step;
 
     @PostConstruct
     private void init() {
@@ -144,6 +140,6 @@ public class JdbcConfiguration implements TransactionManagementConfigurer {
 
     @Bean
     ContactService contactService(){
-        return new ContactServiceImpl(Long.parseLong(quantity),Integer.parseInt(count), Integer.parseInt(step));
+        return new ContactServiceImpl(Long.parseLong(quantity),Integer.parseInt(count));
     }
 }

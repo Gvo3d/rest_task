@@ -1,4 +1,4 @@
-package org.yakimovdenis.rest_task.support;
+package org.yakimovdenis.resttask.support;
 
 public class TimeChecker {
     private long start;

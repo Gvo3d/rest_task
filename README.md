@@ -2,6 +2,18 @@
 REST TASK 
 [![Build Status](https://travis-ci.org/Gvo3d/rest_task.svg?branch=master)](https://travis-ci.org/Gvo3d/rest_task/branches)
 
+
+Регексы использующиеся внутри приложения для валидации строк:
+Начинается: ^[a].*$
+Содержит: ^.*[a].*$
+Кончается: ^.*[a]$
+Не начинается: ^[^a].*$
+Не содержит: ^[^a]*$
+Не кончается: ^.*[^a]$
+
+
+Предыдущая информация:
+
 Замечание:
 Докер-контейнер ссылается своим портом 5432 на порт 5433 хост-машины, т.к. Travis данный порт считает используемым:
 docker: Error response from daemon: driver failed programming external connectivity on endpoint rest (3fabc0d80ce23b65140193d9c5e7e8fa298f578acff92e77dbe53905bf605eef): Error starting userland proxy: listen tcp 0.0.0.0:5432: bind: address already in use.  

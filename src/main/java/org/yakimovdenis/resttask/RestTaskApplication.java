@@ -1,4 +1,4 @@
-package org.yakimovdenis.rest_task;
+package org.yakimovdenis.resttask;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
