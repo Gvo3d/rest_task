@@ -14,6 +14,7 @@ import org.yakimovdenis.resttask.support.TimeChecker;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -53,7 +54,23 @@ public class ContactServiceImpl implements ContactService {
         contacts.addAll(new DataCollector(tempList, pattern, tempList.size() / 2).getResult());
 
         LOGGER.info(new StringBuilder("Regex: ").append(regex).append(" returns list of ").append(contacts.size()).append(" elements. With processing time: ").append(checker.doCheck()).append(" ms.").toString());
-        return contacts;
+        return getData(contacts);
+    }
+
+    private String getData(Collection<Contact> data) {
+        StringBuilder builder = new StringBuilder(100000);
+        builder.append("[\n");
+        boolean first = true;
+        for (Contact contact : data) {
+            if (!first) builder.append(",\n");
+            builder.append(
+                    "    {\n        \"id\": ")
+                    .append(contact.getId())
+                    .append(",\n        \"name\": \"").append(contact.getName()).append("\"\n    }");
+            first = false;
+        }
+        builder.append("]");
+        return builder.toString();
     }
 
     @Override
