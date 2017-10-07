@@ -45,16 +45,6 @@ public class TestJPAConfig implements TransactionManagementConfigurer {
         quantity = 10000;
         count = 50;
     }
-//
-//    @Bean
-//    public DataSource dataSource(){
-//        Log4jdbcProxyDataSource dataSource = new Log4jdbcProxyDataSource(customDataSource());
-//        Log4JdbcCustomFormatter log4JdbcCustomFormatter = new Log4JdbcCustomFormatter();
-//        log4JdbcCustomFormatter.setLoggingType(LoggingType.SINGLE_LINE);
-//        log4JdbcCustomFormatter.setSqlPrefix("SQL:::");
-//        dataSource.setLogFormatter(log4JdbcCustomFormatter);
-//        return dataSource;
-//    }
 
     @Bean
     DataSource customDataSource() {
