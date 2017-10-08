@@ -19,6 +19,7 @@ public class ContactServiceImpl implements ContactService {
     private final static Logger LOGGER = Logger.getLogger(ContactService.class);
     private long dataCount;
     private int charsCount;
+    private List<Contact> tempList;
 
     @Autowired
     private ContactDao contactDao;
@@ -38,6 +39,7 @@ public class ContactServiceImpl implements ContactService {
         if (count < dataCount) {
             fillDatabaseWithGeneratedData(dataCount - count);
         }
+        tempList = (List<Contact>) contactDao.findAll();
         LOGGER.info("Service started in " + checker.doCheck() + " milliseconds.");
     }
 
@@ -47,7 +49,6 @@ public class ContactServiceImpl implements ContactService {
         List<Contact> contacts;
         String pattern = PatternResolver.resolvePattern(regex);
         contacts = new ArrayList<>(Math.toIntExact(count / 2));
-        List<Contact> tempList = (List<Contact>) contactDao.findAll();
         contacts.addAll(new DataCollector(tempList, pattern, tempList.size() / 2).getResult());
 
         LOGGER.info(new StringBuilder("Regex: ").append(regex).append(" returns list of ").append(contacts.size()).append(" elements. With processing time: ").append(checker.doCheck()).append(" ms.").toString());
