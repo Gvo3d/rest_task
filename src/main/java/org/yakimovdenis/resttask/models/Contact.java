@@ -3,11 +3,12 @@ package org.yakimovdenis.resttask.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
 @Table(name="contacts")
-public class Contact {
+public class Contact implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

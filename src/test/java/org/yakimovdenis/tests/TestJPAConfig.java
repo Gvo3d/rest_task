@@ -1,6 +1,7 @@
-package org.yakimovdenis.test;
+package org.yakimovdenis.tests;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -10,7 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
-import org.yakimovdenis.resttask.RestTaskApplication;
 import org.yakimovdenis.resttask.service.ContactService;
 import org.yakimovdenis.resttask.service.ContactServiceImpl;
 
@@ -21,7 +21,7 @@ import java.util.Properties;
 
 @ContextConfiguration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackageClasses = RestTaskApplication.class)
+@EnableJpaRepositories(basePackageClasses = org.yakimovdenis.resttask.RestTaskApplication.class)
 public class TestJPAConfig implements TransactionManagementConfigurer {
 
     private String driver;
@@ -36,7 +36,7 @@ public class TestJPAConfig implements TransactionManagementConfigurer {
 
     public TestJPAConfig() {
         driver = "org.postgresql.Driver";
-        url = "jdbc:postgresql://localhost:5433/postgres";
+        url = "jdbc:postgresql://192.168.99.100:5433/postgres";
         username = "postgres";
         password = "root";
         modelPackage = "org.yakimovdenis.resttask.models";

@@ -34,6 +34,9 @@ public class PatternResolver {
         } else {
             builder.append(endsWith);
         }
+        if (mainData.equals("[.*]") || mainData.equals(".*")) {
+            builder= new StringBuilder(".*");
+        }
         return builder.toString();
     }
 }

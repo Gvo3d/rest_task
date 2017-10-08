@@ -1,4 +1,4 @@
-package org.yakimovdenis.test.database;
+package org.yakimovdenis.tests.database;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.yakimovdenis.resttask.models.Contact;
 import org.yakimovdenis.resttask.service.ContactService;
 
+import java.util.Collection;
 import java.util.List;
 
 @EnableWebMvc
@@ -21,19 +22,19 @@ public class ContactController {
     private ContactService contactService;
 
     @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, value = "/hello/contacts", params = {"nameFilter"})
-    public ResponseEntity<String> getContacts(@RequestParam("nameFilter") String regex){
+    public ResponseEntity<Collection<Contact>> getContacts(@RequestParam("nameFilter") String regex){
         HttpStatus status;
-        String list;
+        Collection<Contact> list;
         try {
              list = contactService.getContactList(regex);
         } catch (Exception e) {
-            LOGGER.warn("BAD REQUEST: "+e);
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            LOGGER.warn("Hazelcast error",e);
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
         if (list.isEmpty()){
             status = HttpStatus.NO_CONTENT;
         } else status = HttpStatus.OK;
-        ResponseEntity<String> response = new ResponseEntity<>(list,status);
+        ResponseEntity<Collection<Contact>> response = new ResponseEntity<>(list,status);
         return response;
     }
 }

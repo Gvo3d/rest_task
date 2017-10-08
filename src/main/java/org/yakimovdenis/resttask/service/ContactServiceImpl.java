@@ -3,8 +3,6 @@ package org.yakimovdenis.resttask.service;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.yakimovdenis.resttask.dao.ContactDao;
 import org.yakimovdenis.resttask.models.Contact;
@@ -43,7 +41,7 @@ public class ContactServiceImpl implements ContactService {
         LOGGER.info("Service started in " + checker.doCheck() + " milliseconds.");
     }
 
-    public String getContactList(String regex) {
+    public List<Contact> getContactList(String regex) {
         TimeChecker checker = new TimeChecker();
         long count = contactDao.count();
         List<Contact> contacts;
@@ -72,3 +70,4 @@ public class ContactServiceImpl implements ContactService {
         LOGGER.info("Data persisted in " + checker.doCheck() + " milliseconds.");
     }
 }
+

@@ -2,7 +2,9 @@ package org.yakimovdenis.resttask.support;
 
 import org.apache.commons.validator.routines.RegexValidator;
 import org.apache.log4j.Logger;
+import org.hibernate.mapping.Collection;
 import org.yakimovdenis.resttask.models.Contact;
+import org.yakimovdenis.resttask.service.ContactService;
 
 import java.util.ArrayList;
 import java.util.HashSet;

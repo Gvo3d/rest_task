@@ -1,11 +1,11 @@
-package org.yakimovdenis.test.parsers;
+package org.yakimovdenis.tests.parsers;
 
 import org.apache.commons.validator.routines.RegexValidator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakimovdenis.resttask.support.TimeChecker;
 import org.yakimovdenis.resttask.models.Contact;
+import org.yakimovdenis.resttask.support.TimeChecker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +35,12 @@ public class ParsersTest {
 
     @Test
     public void testRegexMacther(){
-        RegexValidator regexValidator = new RegexValidator("[^v]*", true);
+        String regex = "[^e]*";
+        RegexValidator regexValidator = new RegexValidator(regex, true);
         List<Contact> contacts = testContacts.parallelStream().filter(c -> regexValidator.isValid(c.getName())).collect(Collectors.toList());
+        for (Contact contact:contacts){
+            Assert.assertEquals(false, contact.getName().contains("e"));
+        }
         printList(contacts);
     }
 
@@ -44,6 +48,9 @@ public class ParsersTest {
     public void testRegexMatcher2(){
         RegexValidator regexValidator = new RegexValidator("^[^A].*", true);
         List<Contact> contacts = testContacts.parallelStream().filter(c -> regexValidator.isValid(c.getName())).collect(Collectors.toList());
+        for (Contact contact:contacts){
+            Assert.assertEquals(false, contact.getName().startsWith("A"));
+        }
         printList(contacts);
     }
 
